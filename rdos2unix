@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [[ $(which dos2unix) = *[!\ ]* ]] 
+  then
+    # return characters other than space
+    echo "dos2unix installed"
+  else
+    echo "dos2unix not installed"
+    exit
+fi
+
+echo "Applying dos2unix to all files ... "
+
+find . -type f -exec dos2unix {} \;
+
+echo "completed"

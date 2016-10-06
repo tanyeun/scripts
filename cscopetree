@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if [[ $(which cscope) = *[!\ ]* ]] 
+  then
+    # return characters other than space
+    echo "cscope installed"
+  else
+    echo "cscope not installed"
+    exit
+fi
+
+if [[ $(find . -maxdepth 1 -name "cscope.out") = *[!\ ]* ]] 
+  then
+    echo "cscope database already present"
+	exit
+  else
+    echo "Generating cscope DB..."
+fi
+
+find . -name "*.c" -o -name "*.cpp" -o -name "*.h" -o -name "*.hpp" > cscope.files
+cscope -q -R -b -i cscope.files
+
+
+echo "completed"
