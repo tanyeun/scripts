@@ -1,0 +1,16 @@
+#!/bin/bash
+
+status=$1 # first parameter: enable/disable
+id=$(xinput list | grep Touchpad | awk '{print $6}' | sed "s/[^0-9]//g")
+
+if [ "$status" == "enable" ]; then
+  echo "Enable $id"
+  xinput --enable $id
+elif [ "$status" == "disable" ]; then
+  echo "Disable"
+  xinput --disable $id
+else
+  echo "Invalid Option" 
+fi
+
+
