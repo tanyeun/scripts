@@ -10,7 +10,7 @@ elif [ "$status" == "disable" ]; then
   echo "Disable"
   xinput --disable $id
 else
-  echo "Invalid Option" 
+  echo "Invalid Option. disable or enable" 
 fi
 
 
