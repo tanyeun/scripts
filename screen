@@ -1,0 +1,20 @@
+#!/bin/bash
+
+status=$1 # first parameter: enable/disable
+list=$(xrandr | grep '\b'connected)
+
+if [ "$status" == "list" ]; then
+  echo "$list"
+elif [ "$status" == "l" ]; then
+  echo "Extend to left"
+  xrandr --output HDMI-2 --mode 1920x1080 --left-of eDP-1
+elif [ "$status" == "r" ]; then
+  echo "Extend to right"
+  xrandr --output HDMI-2 --mode 1920x1080 --right-of eDP-1
+elif [ "$status" == "off" ]; then
+  xrandr --output HDMI-2 --off
+else
+  echo "Invalid Option" 
+fi
+
+
