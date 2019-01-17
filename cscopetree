@@ -17,7 +17,7 @@ if [[ $(find . -maxdepth 1 -name "cscope.out") = *[!\ ]* ]]
     echo "Generating cscope DB..."
 fi
 
-find . -name "*.c" -o -name "*.cpp" -o -name "*.h" -o -name "*.hpp" > cscope.files
+find . -name "*.c" -o -name "*.cpp" -o -name "*.h" -o -name "*.hpp" -o -name "*.scons" -o -name "*.py" -o -name "*.pl" > cscope.files
 cscope -q -R -b -i cscope.files
 
 

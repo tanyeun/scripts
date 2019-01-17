@@ -1,0 +1,86 @@
+#!/bin/bash
+
+echo "Specify string you want to attach your ssh-keygen:"
+
+read str
+
+ssh-keygen -f ~/.ssh/github -C  "$str"
+
+# Add the following to .ssh/config
+cat > ~/.ssh/config << EOL
+Host github.com
+Hostname github.com
+IdentityFile ~/.ssh/github
+EOL
+
+echo "Paste the following to add ssh key in github settings:"
+cat ~/.ssh/github.pub
+
+# Wait for ssh key added to github
+echo "Did you complete adding ssh key to your github? (Y/N)"
+
+read response
+
+if (( "$response" == "Y" )); then
+  git clone git@github.com:tanyeun/dotfiles.git 
+else
+  echo "Please add ssh key in order to get configurations" 
+  exit
+fi
+
+pushd ~/dotfiles
+
+git fetch
+git branch -r
+
+cat << EOF
+Please select your environment:
+1. centos
+2. linux
+3. mac
+4. windows 10 ubuntu bash
+5. windows 10 ubuntu bash connect to linux
+EOF
+
+read option
+
+case "$option" in
+
+  1)  echo "Setting up environment for centos"
+      git checkout centos
+      ;;
+
+  2)  echo "Setting up environment for linux"
+      git checkout linux 
+      ;;
+
+  3)  echo "Setting up environment for mac"
+      git checkout master 
+      ;;
+
+  4)  echo "Setting up environment for windows 10 ubuntu bash" 
+      git checkout windows_ubash
+      cp .inputrc ~ 
+      cp .dircolors ~
+      cp .gitconfig ~
+      ;;
+
+  5)  echo "Setting up environment for windows 10 ubuntu bash connect to linux"
+      git checkout win_ubash2linux 
+      cp .inputrc ~ 
+      cp .dircolors ~
+      cp .gitconfig ~
+      ;;
+esac
+
+# Common settings
+cp .bashrc ~
+cp .bash_profile ~
+cp .vimrc ~
+cp -rf .vim ~
+cp .tmux.conf ~
+
+popd
+
+source ~/.bashrc
+
