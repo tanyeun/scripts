@@ -11,6 +11,8 @@ elif [ "$status" == "l" ]; then
 elif [ "$status" == "r" ]; then
   echo "Extend to right"
   xrandr --output HDMI-2 --mode 1920x1080 --right-of eDP-1
+elif [ "$status" == "copy" ]; then
+  xrandr --output HDMI-2 --mode 1920x1080 --same-as eDP-1
 elif [ "$status" == "off" ]; then
   xrandr --output HDMI-2 --off
 else

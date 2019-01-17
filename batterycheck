@@ -1,0 +1,18 @@
+#!/bin/bash
+
+adapter_status=`acpi -a | sed -En "s/Adapter 0: //p"`
+battery_level=`acpi -b | grep -P -o '[0-9]+(?=%)'`
+
+echo "Battery level is ${battery_level}%"
+#spd-say "Battery level is ${battery_level}%!"
+
+# Check whether low battery only when adapter is offline
+if [ $adapter_status == "off-line" ]; then
+  if [ $battery_level -le 15 ]
+  then
+      notify-send "Battery low" "Battery level is ${battery_level}%!"
+  	  spd-say "Warning warning warning low Battery"
+  fi
+else
+  echo "Connected to power source"
+fi
