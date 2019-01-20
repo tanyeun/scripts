@@ -1,0 +1,12 @@
+#!/bin/bash
+
+NAME=VIM
+if hash vim 2>/dev/null; then
+    echo "Check $NAME Installed" 
+	exit
+else
+    echo "Please Install $NAME" 
+fi
+
+sudo apt-get install vim 
+sudo apt-get install exuberant-ctags

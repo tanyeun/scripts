@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if hash git 2>/dev/null; then
+    echo "Check Git Installed" 
+	exit
+else
+    echo "Please Install Git" 
+fi
+
+sudo apt-get install git
+echo "Specify your email for git"
+read str
+git config --global user.email "$str"                                                             
+
+echo "Specify your name for git"
+read str
+git config --global user.name "$str" 
+
+echo "Specify your default editor for git"
+read str
+git config --global core.editor "$str"
+

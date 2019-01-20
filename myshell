@@ -1,10 +1,21 @@
 #!/bin/bash
 
-echo "Specify string you want to attach your ssh-keygen:"
+if hash git 2>/dev/null; then
+    echo "Check Git Installed" 
+else
+    echo "Please Install Git" 
+    exit
+fi
 
-read str
+FILE=~/.ssh/github
+if [ -f $FILE ]; then
+   echo "File $FILE exists."
+else
+   echo "File $FILE does not exist."
+   echo "Specify string you want to attach your ssh-keygen:"
+   read str
 
-ssh-keygen -f ~/.ssh/github -C  "$str"
+   ssh-keygen -f ~/.ssh/github -C  "$str"
 
 # Add the following to .ssh/config
 cat > ~/.ssh/config << EOL
@@ -13,8 +24,9 @@ Hostname github.com
 IdentityFile ~/.ssh/github
 EOL
 
-echo "Paste the following to add ssh key in github settings:"
-cat ~/.ssh/github.pub
+   echo "Paste the following to add ssh key in github settings:"
+   cat ~/.ssh/github.pub
+fi
 
 # Wait for ssh key added to github
 echo "Did you complete adding ssh key to your github? (Y/N)"
