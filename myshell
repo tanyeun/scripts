@@ -49,9 +49,10 @@ cat << EOF
 Please select your environment:
 1. centos
 2. linux
-3. mac
-4. windows 10 ubuntu bash
-5. windows 10 ubuntu bash connect to linux
+3. linux_server
+4. mac
+5. windows 10 ubuntu bash
+6. windows 10 ubuntu bash connect to linux
 EOF
 
 read option
@@ -66,18 +67,22 @@ case "$option" in
       git checkout linux 
       ;;
 
-  3)  echo "Setting up environment for mac"
+  3)  echo "Setting up environment for linux server"
+      git checkout linux_server
+      ;;
+
+  4)  echo "Setting up environment for mac"
       git checkout master 
       ;;
 
-  4)  echo "Setting up environment for windows 10 ubuntu bash" 
+  5)  echo "Setting up environment for windows 10 ubuntu bash" 
       git checkout windows_ubash
       cp .inputrc ~ 
       cp .dircolors ~
       cp .gitconfig ~
       ;;
 
-  5)  echo "Setting up environment for windows 10 ubuntu bash connect to linux"
+  6)  echo "Setting up environment for windows 10 ubuntu bash connect to linux"
       git checkout win_ubash2linux 
       cp .inputrc ~ 
       cp .dircolors ~
