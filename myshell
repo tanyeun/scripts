@@ -42,6 +42,7 @@ fi
 
 pushd ~/dotfiles
 
+git config --global core.editor vi
 git fetch
 git branch -r
 
@@ -100,4 +101,4 @@ cp .tmux.conf ~
 popd
 
 source ~/.bashrc
-
+tmux source-file ~/.tmux.conf
