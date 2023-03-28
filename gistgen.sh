@@ -10,7 +10,7 @@
 function gistgen_help() {
     echo "Usage: $progname <command> [<options>]"
     echo "Commands:"
-    echo "    get   gist from USER and generate a blog page"
+    echo "    get gist from USER and generate a blog page"
 }
 
 function gistgen() {
